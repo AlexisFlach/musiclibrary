@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using webapi.Data;
-
+using webapi.Dtos;
 
 namespace webapi.Repositories {
 
@@ -18,6 +18,19 @@ namespace webapi.Repositories {
                 throw new Exception(err.Message);
             }
             return false;
+        }
+
+        public Task<ArtistDto> GetArtist(int id)
+        {
+            var artist = (from a in _context.Vinyl.Include(a => a.Artist)
+            where a.Id == id
+            select new ArtistDto
+            {
+                Name = a.Artist.Name
+            }).FirstOrDefaultAsync();
+
+        
+            return artist;
         }
 
         public async Task<IEnumerable<Vinyl>> GetVinyls()
