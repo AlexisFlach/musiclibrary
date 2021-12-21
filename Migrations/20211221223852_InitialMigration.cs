@@ -5,11 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace webapi.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -56,6 +71,7 @@ namespace webapi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     ArtistId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -65,6 +81,12 @@ namespace webapi.Migrations
                         name: "FK_Vinyl_Artist_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Vinyl_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -79,6 +101,11 @@ namespace webapi.Migrations
                 name: "IX_Vinyl_ArtistId",
                 table: "Vinyl",
                 column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vinyl_CategoryId",
+                table: "Vinyl",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -88,6 +115,9 @@ namespace webapi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Artist");
+
+            migrationBuilder.DropTable(
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "RecordLabel");

@@ -11,8 +11,8 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20211221194154_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211221223852_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,21 @@ namespace webapi.Migrations
                     b.ToTable("Artist");
                 });
 
+            modelBuilder.Entity("webapi.Data.MusicCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("webapi.Data.RecordLabel", b =>
                 {
                     b.Property<int>("Id")
@@ -65,6 +80,9 @@ namespace webapi.Migrations
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -72,6 +90,8 @@ namespace webapi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Vinyl");
                 });
@@ -91,7 +111,20 @@ namespace webapi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("webapi.Data.MusicCategory", "Category")
+                        .WithMany("Vinyls")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Artist");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("webapi.Data.MusicCategory", b =>
+                {
+                    b.Navigation("Vinyls");
                 });
 
             modelBuilder.Entity("webapi.Data.RecordLabel", b =>
