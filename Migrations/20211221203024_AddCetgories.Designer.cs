@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.Data;
 
@@ -10,9 +11,10 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211221203024_AddCetgories")]
+    partial class AddCetgories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +80,7 @@ namespace webapi.Migrations
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("MusicCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -89,7 +91,7 @@ namespace webapi.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("MusicCategoryId");
 
                     b.ToTable("Vinyl");
                 });
@@ -109,15 +111,11 @@ namespace webapi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webapi.Data.MusicCategory", "Category")
+                    b.HasOne("webapi.Data.MusicCategory", null)
                         .WithMany("Vinyls")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MusicCategoryId");
 
                     b.Navigation("Artist");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("webapi.Data.MusicCategory", b =>

@@ -2,17 +2,27 @@ using Microsoft.EntityFrameworkCore;
 using webapi.Data;
 
 
-namespace webapi.Repositories {
+namespace webapi.Repositories
+{
 
     public class ArtistRepository : IArtistsRepository
-    {   
+    {
         private readonly ApiDbContext _context;
-        public ArtistRepository(ApiDbContext ctx) {
+        public ArtistRepository(ApiDbContext ctx)
+        {
             _context = ctx;
         }
-        public bool AddArtist(Artist a)
+        public async Task<bool> AddArtist(Artist a)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.Artist.AddAsync(a);
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+            return false;
         }
 
         public async Task<IEnumerable<Artist>> GetArtists()

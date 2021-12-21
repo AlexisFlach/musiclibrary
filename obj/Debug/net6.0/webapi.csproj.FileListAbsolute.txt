@@ -34,3 +34,6 @@
 /Users/codic/Documents/projects/webapi/obj/Debug/net6.0/ref/webapi.dll
 /Users/codic/Documents/projects/webapi/obj/Debug/net6.0/webapi.pdb
 /Users/codic/Documents/projects/webapi/obj/Debug/net6.0/webapi.genruntimeconfig.cache
+/Users/codic/Documents/projects/webapi/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/codic/Documents/projects/webapi/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/codic/Documents/projects/webapi/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll

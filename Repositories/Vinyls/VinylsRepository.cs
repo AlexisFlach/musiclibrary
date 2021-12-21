@@ -4,25 +4,25 @@ using webapi.Data;
 
 namespace webapi.Repositories {
 
-    public class RecordLabelRepository : IRecordLabelRepository
+    public class VinylsRepository : IVinylRepository
     {   
         private readonly ApiDbContext _context;
-        public RecordLabelRepository(ApiDbContext ctx) {
+        public VinylsRepository(ApiDbContext ctx) {
             _context = ctx;
         }
-        public async Task<bool> AddRecordLabel(RecordLabel a)
+        public async Task<bool> AddVinyl(Vinyl v)
         {   
             try {
-                    await _context.RecordLabel.AddAsync(a);
+                    await _context.Vinyl.AddAsync(v);
             } catch(Exception err) {
                 throw new Exception(err.Message);
             }
             return false;
         }
 
-        public async Task<IEnumerable<RecordLabel>> GetRecordLabels()
+        public async Task<IEnumerable<Vinyl>> GetVinyls()
         {
-            return await _context.RecordLabel.ToListAsync();
+            return await _context.Vinyl.Include(v => v.Category).Include(v => v.Artist).ToListAsync();
         }
     }
 }
