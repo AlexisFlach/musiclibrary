@@ -2524,11 +2524,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/codic/Documents/projects/webapi/webapi.csproj",
+      "projectUniqueName": "/Users/codic/Documents/projects/musiclibrary/webapi.csproj",
       "projectName": "webapi",
-      "projectPath": "/Users/codic/Documents/projects/webapi/webapi.csproj",
+      "projectPath": "/Users/codic/Documents/projects/musiclibrary/webapi.csproj",
       "packagesPath": "/Users/codic/.nuget/packages/",
-      "outputPath": "/Users/codic/Documents/projects/webapi/obj/",
+      "outputPath": "/Users/codic/Documents/projects/musiclibrary/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/codic/.nuget/NuGet/NuGet.Config"

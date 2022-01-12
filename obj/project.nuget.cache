@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2//j8U0EWPSl7UWdZWFObOz8I4mYyaqs5i6Xq5adxj1E1u0Msc7r0a4B301jgIcXdSuDof/OYCvwk2OV1RJ3rg==",
+  "dgSpecHash": "R2gClFNxRNsZq3p26g4/TqbvN3dvV9oAmL2ORwBAXBeoppRQYOBfO0F9oOBxvFp/QwXRDf5g9g2zfe5UuMkH4Q==",
   "success": true,
-  "projectFilePath": "/Users/codic/Documents/projects/webapi/webapi.csproj",
+  "projectFilePath": "/Users/codic/Documents/projects/musiclibrary/webapi.csproj",
   "expectedPackageFiles": [
     "/Users/codic/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/codic/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.1/microsoft.aspnetcore.authentication.jwtbearer.6.0.1.nupkg.sha512",
